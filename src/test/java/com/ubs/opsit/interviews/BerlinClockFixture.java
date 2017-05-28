@@ -1,5 +1,6 @@
 package com.ubs.opsit.interviews;
 
+import com.ubs.opsit.interviews.clocks.BerlinClockConverter;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
 import org.junit.Test;
@@ -13,7 +14,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 public class BerlinClockFixture {
 
-    private TimeConverter berlinClock;
+    private TimeConverter berlinClock = new BerlinClockConverter();
     private String theTime;
 
     @Test
@@ -30,7 +31,7 @@ public class BerlinClockFixture {
     }
 
     @Then("the clock should look like $")
-    public void thenTheClockShouldLookLike(String theExpectedBerlinClockOutput) {
+    public void thenTheClockShouldLookLike(String theExpectedBerlinClockOutput) throws IllegalArgumentException {
         assertThat(berlinClock.convertTime(theTime)).isEqualTo(theExpectedBerlinClockOutput);
     }
 }
